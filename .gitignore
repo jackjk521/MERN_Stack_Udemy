@@ -1,4 +1,4 @@
 node_modules/
 config/default.json
-.env   
+config/.env   
 vscode
