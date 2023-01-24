@@ -8,7 +8,7 @@ const jwt = require('jsonwebtoken')
 const config = require('config')
 const {check, validationResult} = require('express-validator')
 
-//@route GET api/auth
+// @route GET api/auth   (to hit this route to always check token : jwt - stateless)
 // @desc Test route
 // @access Public
 
@@ -22,7 +22,7 @@ router.get('/', auth, async(req, res) => {
     }
 })
 
-//@route POST api/auth
+// @route POST api/auth
 // @desc Authenticate and get token
 // @access Public
 router.post(

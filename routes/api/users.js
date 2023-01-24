@@ -15,7 +15,7 @@ const {User} = require('../../models/User.model')
 
 router.post( '/', 
     [
-    check('name', 'Name is required').not().isEmpty(),
+    check('userName', 'Name is required').not().isEmpty(),
     check('email', 'Please include a valid email').isEmail(),
     check('password', 'Please enter a password a password with 6 or more characters').isLength({min:6})
 
@@ -26,10 +26,9 @@ router.post( '/',
             return res.status(400).json({ errors: errors.array()})
         }
 
-        const { name, email, password } = req.body
+        const { userName, email, password } = req.body
 
         try {
-
             // Can be improved with findOrCreate 
             let user = await User.findOne({ where: { email: email} })
             // See if the user exists
@@ -45,16 +44,19 @@ router.post( '/',
             })
 
              user =  new User({
-                userName: name,
+                userName: userName,
                 email: email,
                 avatar: avatar,
                 password: password
             })
+            console.log(req.body)
             // Ecrypt password
             const salt = await bcrypt.genSalt(10)
             user.password = await bcrypt.hash(password, salt)
 
-            await user.save()
+            await user.save() //error here
+            console.log("works here 2")
+
             // return jsonwebtoken
             const payload = {
                 user:{
