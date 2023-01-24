@@ -2,6 +2,9 @@ const { User } = require('./User.model')
 const { Profile } = require('./Profile.model')
 const { Experience } = require('./Experience.model')
 const { Education } = require('./Education.model')
+const { Post } = require('./Post.model')
+const { Like } = require('./Like.model')
+const { Comment } = require('./Comment.model')
 
 
 module.exports = () => {
@@ -33,6 +36,27 @@ module.exports = () => {
     Education.belongsTo(User, {
         foreignKey:'user_id',
         targetKey: 'id'
+    })
+
+    // Posts 
+    Post.hasMany(Like, {
+        foreignKey: 'post_id',
+        sourceKey:'post_id'
+    })
+
+    Like.belongsTo(Post, {
+        foreignKey: 'post_id',
+        targetKey:'post_id'
+    })
+    
+    Post.hasMany(Comment, {
+        foreignKey: 'post_id',
+        sourceKey:'post_id'
+    })
+
+    Comment.belongsTo(Post, {
+        foreignKey: 'post_id',
+        targetKey:'post_id'
     })
 
 }

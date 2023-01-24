@@ -19,11 +19,9 @@ const Navbar = ({
         <Link to="/profiles">
             Developers <MdOutlineDashboard />
         </Link>
-        <a onClick={logout} href="#!">
-          <span className="hide-sm">
-            Logout <BiLogOut />
-          </span>
-        </a>
+        <Link to="/posts">
+            Posts <MdOutlineDashboard />
+        </Link>
       </li>
       <li>
         <Link to="/dashboard">
